@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flujos por rol → Features candidatas — Discovery SAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #F36F21;
+            --brand-cta: #FF5722;
+            --surface-base: #FFFFFF;
+            --surface-raised: #F8F9FA;
+            --text-primary: #212529;
+            --text-numbers: #1A1A1A;
+            --border-default: #E0E0E0;
+            --border-table: #E9ECEF;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--border-default);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic__canvas {
+            background-color: var(--surface-base);
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .infographic__header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--brand-primary);
+            padding-bottom: 15px;
+        }
+
+        .infographic__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin: 0 0 8px 0;
+        }
+
+        .infographic__subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--text-numbers);
+            border-left: 4px solid var(--brand-primary);
+            padding-left: 10px;
+        }
+
+        p { line-height: 1.6; margin: 0 0 16px 0; font-size: 14px; }
+
+        .callout {
+            border-left: 4px solid var(--brand-primary);
+            background-color: var(--surface-raised);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-default);
+            border-right: 1px solid var(--border-default);
+            border-bottom: 1px solid var(--border-default);
+            margin-bottom: 30px;
+        }
+
+        .callout p { margin: 0; }
+        .callout .label { font-size: 13px; color: var(--brand-primary); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--surface-base);
+        }
+
+        .data-table th, .data-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-table);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .data-table th {
+            font-weight: 700;
+            color: var(--text-numbers);
+            background-color: var(--surface-raised);
+        }
+
+        .data-table tbody tr:hover { background-color: var(--surface-raised); }
+
+        .badge-feature {
+            background-color: var(--brand-primary);
+            color: var(--surface-base);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .steps-list {
+            background-color: var(--surface-raised);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 30px;
+        }
+
+        .steps-list h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .steps-list ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .steps-list li {
+            margin-bottom: 8px;
+        }
+
+        .foot {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-default);
+            font-size: 13px;
+            color: #5B6270;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic__canvas">
+        <header class="infographic__header">
+            <h1 class="infographic__title">Flujos por rol → Features candidatas[cite: 5]</h1>
+            <p class="infographic__subtitle">Paso intermedio entre la arquitectura de información y la lista de features priorizada[cite: 5]</p>
+        </header>
+
+        <div class="callout">
+            <p class="label">Cómo usar este documento[cite: 5]</p>
+            <p>Este documento no es el spec final. Es el paso intermedio: cada nodo de decisión en los diagramas de flujo se traduce aquí en una feature candidata, con trazabilidad a por qué existe[cite: 5]. Se trabaja como puntos de checkpoint con desarrollo para validar viabilidad antes de invertir tiempo en diseño de pantallas[cite: 5].</p>
+        </div>
+
+        <!-- Agente SAC -->
+        <h2 class="section-title">Agente SAC[cite: 5]</h2>
+        <p>El flujo cubre las cuatro causas reales de novedad identificadas en la investigación del CRM: cliente ilocalizable/dirección incompleta, cliente rehúsa pagar o recibir, producto averiado, y acta de incautación[cite: 5].</p>
+        
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">#[cite: 5]</th>
+                        <th style="width: 250px;">Feature[cite: 5]</th>
+                        <th>De dónde sale[cite: 5]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-feature">F1</span></td>
+                        <td><strong>Bandeja ordenada automáticamente por urgencia real de SLA</strong>[cite: 5]</td>
+                        <td>Nodo "Lista ordenada por urgencia" — responde directamente a H2 (hoy la priorización es manual/intuitiva)[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F2</span></td>
+                        <td><strong>Vista de caso unificada</strong> (urgencia + contexto + evidencia + historial)[cite: 5]</td>
+                        <td>Nodo "Vista de caso" — responde a H1 (agentes usan Excel/WhatsApp porque el sistema no centraliza contexto)[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F3</span></td>
+                        <td><strong>WhatsApp integrado dentro de la vista de caso</strong>[cite: 5]</td>
+                        <td>Rama "Contacta al cliente por WhatsApp" — extiende el patrón Chatcenter que Dropi ya tiene[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F4</span></td>
+                        <td><strong>Formulario de solución con evidencia obligatoria adjunta</strong>[cite: 5]</td>
+                        <td>Rama "Actualiza dirección" → "Adjunta evidencia" — responde a H4 (reapertura correlaciona con falta de evidencia, no con mal registro)[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F5</span></td>
+                        <td><strong>Conteo automático de intentos con transición a Devolución</strong>[cite: 5]</td>
+                        <td>Decisión "Se agotaron los 2 intentos" — automatiza una regla que hoy el agente seguía a mano[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F6</span></td>
+                        <td><strong>Campo de "responsable de la siguiente acción"</strong> (apuntando a Proveedor)[cite: 5]</td>
+                        <td>Rama "Acta de incautación" → "Escala al Proveedor" — evita que el caso se vea atascado sin explicación[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F7</span></td>
+                        <td><strong>Registro estructurado del motivo</strong> cuando el cliente rehúsa pagar/recibir[cite: 5]</td>
+                        <td>Rama "Documenta el motivo" — alimenta la taxonomía de causas y las métricas del supervisor[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F8</span></td>
+                        <td><strong>Vínculo entre evidencia de avería y reembolso de seguro</strong>[cite: 5]</td>
+                        <td>Rama "Producto averiado" → "Reembolso de seguro"[cite: 5]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Supervisor -->
+        <h2 class="section-title">Supervisor[cite: 5]</h2>
+        <p>El flujo cubre la gestión agregada del equipo, no casos individuales — responde directamente a H6 (hoy los supervisores no tienen visibilidad agregada, solo casos uno por uno)[cite: 5].</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">#[cite: 5]</th>
+                        <th style="width: 250px;">Feature[cite: 5]</th>
+                        <th>De dónde sale[cite: 5]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-feature">F9</span></td>
+                        <td><strong>Panel agregado de riesgo de SLA por equipo</strong>[cite: 5]</td>
+                        <td>Nodo "Ve casos en riesgo de incumplir SLA"[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F10</span></td>
+                        <td><strong>Indicador de carga de trabajo por agente</strong>[cite: 5]</td>
+                        <td>Decisión "El agente asignado está sobrecargado"[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F11</span></td>
+                        <td><strong>Reasignación de casos entre agentes</strong> desde el mismo panel[cite: 5]</td>
+                        <td>Rama "Reasigna el caso a otro agente" — reemplaza la intuición fuera del sistema (H6)[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F12</span></td>
+                        <td><strong>Detección y documentación de patrones repetidos</strong>[cite: 5]</td>
+                        <td>Rama "Detecta un patrón repetido" → "Documenta el patrón"[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F13</span></td>
+                        <td><strong>Canal de escalamiento formal a Ops o PO</strong> como problema sistémico[cite: 5]</td>
+                        <td>Nodo "Escala a Ops o PO como problema sistémico"[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F14</span></td>
+                        <td><strong>Vista de desempeño individual por agente</strong>[cite: 5]</td>
+                        <td>Rama "Revisa los casos del agente en detalle"[cite: 5]</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-feature">F15</span></td>
+                        <td><strong>Reporte de cierre de turno automatizado</strong>[cite: 5]</td>
+                        <td>Nodo "Genera reporte de cierre de turno" — responde a que el 87% de supervisores lo arma a mano hoy[cite: 5]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Siguiente paso con desarrollo -->
+        <div class="steps-list">
+            <h3>Siguiente paso con desarrollo[cite: 5]</h3>
+            <p>Antes de convertir esto en spec, la conversación con dev debería validar, rama por rama[cite: 5]:</p>
+            <ol>
+                <li>¿Qué de esta lógica ya existe en el backend (aunque no esté expuesto en UI) vs. qué hay que construir?[cite: 5]</li>
+                <li>¿Los campos que asumo — responsable de la acción, conteo de intentos, taxonomía de causas — ya son datos estructurados o hoy viven en texto libre?[cite: 5]</li>
+                <li>¿Qué transición de estado dispara cada acción del agente, y coincide con la máquina de estados real?[cite: 5]</li>
+            </ol>
+            <p style="margin-top: 12px; margin-bottom: 0;"><em>Solo después de esa validación tiene sentido fijar el alcance como spec cerrado[cite: 5].</em></p>
+        </div>
+
+        <footer class="foot">
+            Documento derivado de síntesis de Discovery SAC · Dropi[cite: 5]
+        </footer>
+    </div>
+
+</body>
+</html>
