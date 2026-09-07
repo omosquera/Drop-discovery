@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía - Hallazgos Discovery Dropi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #F36F21;
+            --brand-cta: #FF5722;
+            --surface-base: #FFFFFF;
+            --surface-raised: #F8F9FA;
+            --surface-dark: #121212;
+            --surface-raised-dark: #1E1E1E;
+            --text-primary: #212529;
+            --text-numbers: #1A1A1A;
+            --border-default: #E0E0E0;
+            --border-table: #E9ECEF;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--border-default);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic__canvas {
+            background-color: var(--surface-base);
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .infographic__header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--brand-primary);
+            padding-bottom: 15px;
+        }
+
+        .infographic__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin: 0 0 8px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--text-numbers);
+            border-left: 4px solid var(--brand-primary);
+            padding-left: 10px;
+        }
+        
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 24px 0 16px 0;
+            color: var(--text-primary);
+        }
+
+        /* Ocultar citas para mantener el texto limpio visualmente como solicitó el usuario */
+        .cite {
+            display: none;
+        }
+
+        /* Grid Layout Original V1 */
+        .grid-kpi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--surface-raised);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card__value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin-bottom: 12px;
+        }
+
+        .card__label {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Gráficos de Torta CSS Originales V1 */
+        .pie-chart {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+        .pie-75 { background: conic-gradient(var(--brand-cta) 75%, var(--border-default) 0); }
+        .pie-87 { background: conic-gradient(var(--brand-cta) 87%, var(--border-default) 0); }
+        .pie-38 { background: conic-gradient(var(--brand-primary) 38%, var(--border-default) 0); }
+
+        /* Sección de Barras Originales V1 */
+        .bar-chart__container {
+            background-color: var(--surface-raised);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .bar-row:last-child { margin-bottom: 0; }
+
+        .bar-label {
+            width: 140px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .bar-track {
+            flex-grow: 1;
+            height: 24px;
+            background-color: var(--border-default);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 16px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background-color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: var(--surface-base);
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .bar-fill.chile { width: 86%; }
+        .bar-fill.colombia { width: 74%; }
+        .bar-fill.mexico { width: 73%; }
+        
+        .bar-fill.agentes { width: 75%; background-color: var(--brand-cta); }
+        .bar-fill.supervisores { width: 87%; background-color: var(--brand-primary); }
+
+        /* Estilo limpio para Tablas */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--surface-base);
+        }
+
+        .data-table th, .data-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-table);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .data-table th {
+            font-weight: 700;
+            color: var(--text-numbers);
+            background-color: var(--surface-raised);
+        }
+
+        .badge {
+            background-color: var(--brand-cta);
+            color: var(--surface-base);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .badge.matizada { background-color: var(--text-primary); }
+
+        /* Insights */
+        .insights-list { padding-left: 20px; line-height: 1.6; font-size: 14px; }
+        .insights-list li { margin-bottom: 12px; }
+        .insights-list strong { color: var(--text-numbers); }
+    </style>
+</head>
+<body>
+
+    <div class="infographic__canvas">
+        <header class="infographic__header">
+            <h1 class="infographic__title">Hallazgos del Discovery<span class="cite">[cite: 1]</span></h1>
+            <p>Gestión de Novedades y Casos SAC<span class="cite">[cite: 1]</span></p>
+        </header>
+
+        <!-- 1. Alcance de la muestra -->
+        <h2 class="section-title">1. Alcance de la muestra<span class="cite">[cite: 1]</span></h2>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rol<span class="cite">[cite: 1]</span></th>
+                        <th>Países cubiertos<span class="cite">[cite: 1]</span></th>
+                        <th>N<span class="cite">[cite: 1]</span></th>
+                        <th>Por qué este tamaño<span class="cite">[cite: 1]</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Agente SAC<span class="cite">[cite: 1]</span></td>
+                        <td>CO · MX · CL<span class="cite">[cite: 1]</span></td>
+                        <td>8<span class="cite">[cite: 1]</span></td>
+                        <td>Rol de mayor volumen y variabilidad diaria<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Supervisor / Team lead SAC<span class="cite">[cite: 1]</span></td>
+                        <td>CO · MX · CL<span class="cite">[cite: 1]</span></td>
+                        <td>8<span class="cite">[cite: 1]</span></td>
+                        <td>Múltiples turnos y países permiten cubrir con profundidad<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vendedor / seller afectado<span class="cite">[cite: 1]</span></td>
+                        <td>CO · MX · CL<span class="cite">[cite: 1]</span></td>
+                        <td>8<span class="cite">[cite: 1]</span></td>
+                        <td>Población amplia; se buscó variedad de volumen de venta<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ops / Logística<span class="cite">[cite: 1]</span></td>
+                        <td>CO · MX · CL<span class="cite">[cite: 1]</span></td>
+                        <td>6<span class="cite">[cite: 1]</span></td>
+                        <td>2 coordinadores por país cubren la variación real de transportadoras<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Lead técnico / Dev<span class="cite">[cite: 1]</span></td>
+                        <td>Transversal<span class="cite">[cite: 1]</span></td>
+                        <td>4<span class="cite">[cite: 1]</span></td>
+                        <td>Cubre backend por país + arquitectura, con headcount naturalmente bajo<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>PO<span class="cite">[cite: 1]</span></td>
+                        <td>Transversal<span class="cite">[cite: 1]</span></td>
+                        <td>2<span class="cite">[cite: 1]</span></td>
+                        <td>Solo existe 1 PO en la dupla directa; se sumó 1 de otra vertical para contraste<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 2. Hallazgos cuantitativos agregados -->
+        <h2 class="section-title">2. Hallazgos cuantitativos agregados<span class="cite">[cite: 1]</span></h2>
+        <div class="grid-kpi">
+            <div class="card">
+                <div class="pie-chart pie-75"></div>
+                <div class="card__value">75%</div>
+                <div class="card__label">Agentes usan herramienta paralela<span class="cite">[cite: 1]</span></div>
+            </div>
+            <div class="card">
+                <div class="pie-chart pie-87"></div>
+                <div class="card__value">87%</div>
+                <div class="card__label">Supervisores arman reportes manuales<span class="cite">[cite: 1]</span></div>
+            </div>
+            <div class="card">
+                <div class="pie-chart pie-38"></div>
+                <div class="card__value">38%</div>
+                <div class="card__label">Vendedores consideraron reducir operación<span class="cite">[cite: 1]</span></div>
+            </div>
+            <div class="card">
+                <div class="card__value">34</div>
+                <div class="card__label">Casos atendidos por agente al día<span class="cite">[cite: 1]</span></div>
+            </div>
+            <div class="card">
+                <div class="card__value">2.4 d</div>
+                <div class="card__label">Tiempo de resolución percibido<span class="cite">[cite: 1]</span></div>
+            </div>
+            <div class="card">
+                <div class="card__value">33%</div>
+                <div class="card__label">Ops con notificación automática<span class="cite">[cite: 1]</span></div>
+            </div>
+        </div>
+
+        <!-- Barras de estado -->
+        <h3 class="subsection-title">Cumplimiento promedio de SLA (agentes)<span class="cite">[cite: 1]</span></h3>
+        <div class="bar-chart__container">
+            <div class="bar-row">
+                <div class="bar-label">Chile</div>
+                <div class="bar-track">
+                    <div class="bar-fill chile">86%</div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Colombia</div>
+                <div class="bar-track">
+                    <div class="bar-fill colombia">74%</div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">México</div>
+                <div class="bar-track">
+                    <div class="bar-fill mexico">73%</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="subsection-title">Trabajo con soluciones alternas al sistema por rol<span class="cite">[cite: 1]</span></h3>
+        <div class="bar-chart__container">
+            <div class="bar-row">
+                <div class="bar-label">Agentes SAC</div>
+                <div class="bar-track">
+                    <div class="bar-fill agentes">75%</div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Supervisores</div>
+                <div class="bar-track">
+                    <div class="bar-fill supervisores">87%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Hallazgos cualitativos por rol -->
+        <h2 class="section-title">3. Hallazgos cualitativos por rol<span class="cite">[cite: 1]</span></h2>
+        
+        <h3 class="subsection-title">3.1 Agente SAC<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>País</th><th>Contexto</th><th>Dato clave</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>P01<span class="cite">[cite: 1]</span></td><td>CO<span class="cite">[cite: 1]</span></td><td>8 meses<span class="cite">[cite: 1]</span></td><td>34 casos/día · SLA 78% · Paralelo: Sí<span class="cite">[cite: 1]</span></td><td>“Cuando el pedido tiene dos direcciones diferentes en el sistema y en la guía de la transportadora, tengo que llamar para confirmar; eso me come 10 minutos por caso.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>P03<span class="cite">[cite: 1]</span></td><td>MX<span class="cite">[cite: 1]</span></td><td>5 meses<span class="cite">[cite: 1]</span></td><td>29 casos/día · SLA 65% · Paralelo: No<span class="cite">[cite: 1]</span></td><td>“En México casi todas las novedades son por domicilio no encontrado; el mapa que muestra el sistema casi nunca coincide con la dirección real.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>P05<span class="cite">[cite: 1]</span></td><td>CL<span class="cite">[cite: 1]</span></td><td>3 años<span class="cite">[cite: 1]</span></td><td>45 casos/día · SLA 90% · Paralelo: No<span class="cite">[cite: 1]</span></td><td>“Ya me sé de memoria cuáles transportadoras casi nunca resuelven a tiempo, así que esos los priorizo primero aunque el sistema no me lo sugiera.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">3.2 Supervisor / Team lead SAC<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>País</th><th>Contexto</th><th>Dato clave</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>S01<span class="cite">[cite: 1]</span></td><td>CO<span class="cite">[cite: 1]</span></td><td>4 años<span class="cite">[cite: 1]</span></td><td>Equipo: 12 · Reporte: Sí · Se entera: Reactivo<span class="cite">[cite: 1]</span></td><td>“Me entero de que vamos a incumplir SLA casi al mismo tiempo que mi jefe me pregunta por qué incumplimos.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>S02<span class="cite">[cite: 1]</span></td><td>MX<span class="cite">[cite: 1]</span></td><td>2 años<span class="cite">[cite: 1]</span></td><td>Equipo: 9 · Reporte: Sí · Se entera: Reactivo<span class="cite">[cite: 1]</span></td><td>“Tengo que pedirle al de sistemas un reporte especial cuando quiero ver por transportadora; no está en el dashboard.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>S03<span class="cite">[cite: 1]</span></td><td>CL<span class="cite">[cite: 1]</span></td><td>3 años<span class="cite">[cite: 1]</span></td><td>Equipo: 7 · Reporte: No · Se entera: Reactivo<span class="cite">[cite: 1]</span></td><td>“Reasigno casos por intuición, viendo quién tiene ‘cara’ de estar ahogado, no porque el sistema me lo diga.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">3.3 Vendedor / seller afectado<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>País</th><th>Contexto</th><th>Dato clave</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>V02<span class="cite">[cite: 1]</span></td><td>MX<span class="cite">[cite: 1]</span></td><td>80/mes<span class="cite">[cite: 1]</span></td><td>Res. percibida: 3 días · Churn: Sí<span class="cite">[cite: 1]</span></td><td>“Tuve una racha de 3 novedades seguidas sin resolver y casi me paso a otra plataforma.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>V04<span class="cite">[cite: 1]</span></td><td>CO<span class="cite">[cite: 1]</span></td><td>60/mes<span class="cite">[cite: 1]</span></td><td>Res. percibida: 4 días · Churn: Sí<span class="cite">[cite: 1]</span></td><td>“Cuando el pago contra entrega se atrasa, se me complica pagarle a mi proveedor.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>V06<span class="cite">[cite: 1]</span></td><td>CL<span class="cite">[cite: 1]</span></td><td>90/mes<span class="cite">[cite: 1]</span></td><td>Res. percibida: 2 días · Churn: No<span class="cite">[cite: 1]</span></td><td>“Cuando hay novedad, no sé si el problema es mío o de la transportadora.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">3.4 Ops / Logística<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>País</th><th>Dato clave</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>O01<span class="cite">[cite: 1]</span></td><td>CO<span class="cite">[cite: 1]</span></td><td>3 transportadoras · Notificación: Parcial<span class="cite">[cite: 1]</span></td><td>“Solo 2 de las 3 transportadoras nos mandan la novedad por API; la tercera hay que revisarla manualmente en su portal.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>O02<span class="cite">[cite: 1]</span></td><td>MX<span class="cite">[cite: 1]</span></td><td>4 transportadoras · Notificación: Manual<span class="cite">[cite: 1]</span></td><td>“Cada transportadora tiene su propio código para la misma causa de novedad; toca traducirlo a mano.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>O03<span class="cite">[cite: 1]</span></td><td>CL<span class="cite">[cite: 1]</span></td><td>2 transportadoras · Notificación: Automática<span class="cite">[cite: 1]</span></td><td>“Acá es más simple: solo dos transportadoras y ambas tienen API decente.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">3.5 Lead técnico / Dev<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Área</th><th>Antigüedad</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>D01<span class="cite">[cite: 1]</span></td><td>Backend · Colombia<span class="cite">[cite: 1]</span></td><td>4 años<span class="cite">[cite: 1]</span></td><td>“El esquema de novedades nació en Colombia; cuando escalamos a otros países, cada uno le agregó campos propios encima. Hoy no hay un ‘core’ limpio.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>D02<span class="cite">[cite: 1]</span></td><td>Backend · México<span class="cite">[cite: 1]</span></td><td>2 años<span class="cite">[cite: 1]</span></td><td>“Unificar la taxonomía es factible, pero implicaría replantear la tabla de causas, que hoy vive semi-hardcodeada por país.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="subsection-title">3.6 PO<span class="cite">[cite: 1]</span></h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Área</th><th>Antigüedad</th><th>Cita representativa</th></tr></thead>
+                <tbody>
+                    <tr><td>PO1<span class="cite">[cite: 1]</span></td><td>SAC / Ops<span class="cite">[cite: 1]</span></td><td>2 años<span class="cite">[cite: 1]</span></td><td>“No hemos tenido tiempo de documentar bien esto porque siempre hay un fuego más urgente que apagar.”<span class="cite">[cite: 1]</span></td></tr>
+                    <tr><td>PO2<span class="cite">[cite: 1]</span></td><td>Financiero<span class="cite">[cite: 1]</span></td><td>3 años<span class="cite">[cite: 1]</span></td><td>“Nosotros en financiero tenemos el mismo problema de falta de estándar entre países; si logran un patrón replicable, con gusto lo adoptamos.”<span class="cite">[cite: 1]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. Validación de hipótesis -->
+        <h2 class="section-title">4. Validación de hipótesis<span class="cite">[cite: 1]</span></h2>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr><th>Hipótesis</th><th>Estado</th><th>Evidencia</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Agentes usan herramientas paralelas<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge">Confirmada</span><span class="cite">[cite: 1]</span></td>
+                        <td>75% (6/8) reportó uso de Excel, WhatsApp o notas propias.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>2. Priorización de casos es manual/intuitiva<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge">Confirmada</span><span class="cite">[cite: 1]</span></td>
+                        <td>Ningún agente ni supervisor describió un criterio basado en tiempo restante de SLA.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>3. Causas de novedad varían por país<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge matizada">Con matiz</span><span class="cite">[cite: 1]</span></td>
+                        <td>Hay núcleo común (~60%) y 40% de variación por transportadora/país.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>4. Reapertura por mal registro inicial<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge matizada">Matizada</span><span class="cite">[cite: 1]</span></td>
+                        <td>Correlaciona más con falta de evidencia/adjuntos que con “mal registro”.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>5. Incumplimiento SLA correlaciona con pérdida de vendedores<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge">Confirmada</span><span class="cite">[cite: 1]</span></td>
+                        <td>38% consideró reducir operación; coinciden con resolución percibida ≥3 días.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                    <tr>
+                        <td>6. Falta de visibilidad agregada para supervisores<span class="cite">[cite: 1]</span></td>
+                        <td><span class="badge">Confirmada</span><span class="cite">[cite: 1]</span></td>
+                        <td>87% arma reportes manualmente; 75% se entera reactivamente.<span class="cite">[cite: 1]</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 5. Insights clave transversales -->
+        <h2 class="section-title">5. Insights clave transversales<span class="cite">[cite: 1]</span></h2>
+        <ul class="insights-list">
+            <li><strong>El problema no es de UI, es de arquitectura de información:</strong> casi todo el trabajo paralelo existe porque el sistema no centraliza contexto ni urgencia.<span class="cite">[cite: 1]</span></li>
+            <li><strong>Hay más núcleo común del sugerido:</strong> ~60% de las causas de novedad son compartidas entre países.<span class="cite">[cite: 1]</span></li>
+            <li><strong>La gestión es reactiva por diseño de herramienta:</strong> agentes y supervisores compensan con juicio experto lo que el sistema no calcula.<span class="cite">[cite: 1]</span></li>
+            <li><strong>El costo se mide en revenue:</strong> el 38% de vendedores en riesgo de churn está asociado a tiempos de resolución percibidos.<span class="cite">[cite: 1]</span></li>
+            <li><strong>Disposición del equipo técnico:</strong> están dispuestos a tocar el modelo de datos con evidencia concreta y ciclos cortos.<span class="cite">[cite: 1]</span></li>
+        </ul>
+    </div>
+
+</body>
+</html>
