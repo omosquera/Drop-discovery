@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historias de Usuario — Checkpoint PO + Tech + Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #F36F21;
+            --brand-cta: #FF5722;
+            --surface-base: #FFFFFF;
+            --surface-raised: #F8F9FA;
+            --surface-dark: #121212;
+            --surface-code: #1E1E1E;
+            --text-primary: #212529;
+            --text-numbers: #1A1A1A;
+            --text-muted: #5B6270;
+            --border-default: #E0E0E0;
+            --border-table: #E9ECEF;
+            --amber-bg: #FFF8E1;
+            --amber-border: #FFB300;
+            --amber-text: #B78103;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--border-default);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic__canvas {
+            background-color: var(--surface-base);
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .infographic__header {
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--brand-primary);
+            padding-bottom: 15px;
+        }
+
+        .infographic__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin: 0 0 8px 0;
+        }
+
+        .infographic__subtitle {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px 0 18px 0;
+            color: var(--text-numbers);
+            border-left: 4px solid var(--brand-primary);
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-feature {
+            background-color: var(--brand-primary);
+            color: var(--surface-base);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        p { line-height: 1.6; margin: 0 0 16px 0; font-size: 14px; }
+
+        .callout {
+            border-left: 4px solid var(--brand-primary);
+            background-color: var(--surface-raised);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-default);
+            border-right: 1px solid var(--border-default);
+            border-bottom: 1px solid var(--border-default);
+            margin-bottom: 30px;
+        }
+
+        .callout p { margin: 0; }
+        .callout .label { 
+            font-size: 13px; 
+            color: var(--brand-primary); 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+
+        /* Tarjeta de Historia de Usuario */
+        .story-card {
+            background: var(--surface-raised);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .story-card strong {
+            color: var(--brand-primary);
+        }
+
+        /* Bloques Gherkin */
+        .gherkin-box {
+            background-color: var(--surface-dark);
+            color: #E0E0E0;
+            font-family: var(--font-code);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .gherkin-keyword {
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+
+        .gherkin-block {
+            margin-bottom: 14px;
+        }
+        .gherkin-block:last-child { margin-bottom: 0; }
+
+        /* Cuadro de Pregunta Abierta */
+        .open-question {
+            background-color: var(--amber-bg);
+            border: 1px solid var(--amber-border);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 32px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #332400;
+        }
+
+        .open-question__label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--amber-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .conclusion-box {
+            background: #111827;
+            color: #F9FAFB;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 40px;
+            border-left: 4px solid var(--brand-cta);
+        }
+
+        .conclusion-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--brand-primary);
+        }
+
+        .conclusion-box p {
+            margin: 0;
+            font-size: 13px;
+            color: #D1D5DB;
+        }
+
+        .foot {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-default);
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .infographic__canvas { padding: 20px; }
+            .infographic__title { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic__canvas">
+        <header class="infographic__header">
+            <h1 class="infographic__title">Historias de usuario y criterios de aceptación[cite: 6]</h1>
+            <p class="infographic__subtitle">Insumo para checkpoint PO + Tech Lead + Designer — Novedades y casos SAC[cite: 6]</p>
+        </header>
+
+        <div class="callout">
+            <p class="label">Cómo usar este documento[cite: 6]</p>
+            <p>Este documento es el insumo de entrada para el primer checkpoint conjunto entre PO, Tech Lead y Designer[cite: 6]. No es un spec cerrado: cada historia trae criterios de aceptación en formato Gherkin (Dado / Cuando / Entonces), y varios criterios están marcados como <strong>preguntas abiertas</strong> — decisiones que el diseño no puede resolver solo y que requieren negocio (PO) y factibilidad (Tech Lead)[cite: 6].</p>
+            <p style="margin-top: 10px;">Cubre las tres features del cuadrante "hacer primero" que sostienen el flujo crítico del Agente SAC: bandeja priorizada (F1), vista de caso unificada (F2), y evidencia obligatoria al resolver (F4)[cite: 6].</p>
+        </div>
+
+        <!-- Historia 1 -->
+        <h2 class="section-title">
+            <span>Historia 1 — Bandeja priorizada por urgencia</span>
+            <span class="badge-feature">F1</span>[cite: 6]
+        </h2>
+
+        <div class="story-card">
+            <strong>Como</strong> agente SAC, <strong>quiero</strong> que mi bandeja de casos esté ordenada automáticamente por tiempo restante de SLA, <strong>para</strong> atender primero los casos con mayor riesgo de incumplimiento sin depender de mi memoria[cite: 6].
+        </div>
+
+        <div class="gherkin-box">
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que tengo varios casos abiertos con distintos tiempos restantes de SLA<br>
+                <span class="gherkin-keyword">Cuando</span> abro mi bandeja de casos<br>
+                <span class="gherkin-keyword">Entonces</span> se muestran ordenados de menor a mayor tiempo restante, con el más urgente primero[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> un caso con menos de 2 horas de SLA restante<br>
+                <span class="gherkin-keyword">Cuando</span> veo la bandeja<br>
+                <span class="gherkin-keyword">Entonces</span> el caso se resalta visualmente como urgente[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que dos casos tienen el mismo tiempo restante de SLA<br>
+                <span class="gherkin-keyword">Cuando</span> se ordenan en la bandeja<br>
+                <span class="gherkin-keyword">Entonces</span> se aplica un criterio de desempate acordado con dev (ej. antigüedad del caso)[cite: 6]
+            </div>
+        </div>
+
+        <div class="open-question">
+            <div class="open-question__label">❓ Pregunta abierta para el checkpoint[cite: 6]</div>
+            ¿Cuál es el criterio de desempate correcto cuando dos casos tienen el mismo tiempo restante?[cite: 6] El diseño identifica que se necesita uno; el negocio (PO) y la factibilidad de datos (Tech Lead) definen cuál[cite: 6].
+        </div>
+
+        <!-- Historia 2 -->
+        <h2 class="section-title">
+            <span>Historia 2 — Vista de caso unificada</span>
+            <span class="badge-feature">F2</span>[cite: 6]
+        </h2>
+
+        <div class="story-card">
+            <strong>Como</strong> agente SAC, <strong>quiero</strong> ver en una sola pantalla la urgencia, el contexto del pedido, la evidencia y el historial del caso, <strong>para</strong> no tener que salir a Excel o WhatsApp mientras resuelvo una novedad[cite: 6].
+        </div>
+
+        <div class="gherkin-box">
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que abro un caso desde la bandeja<br>
+                <span class="gherkin-keyword">Cuando</span> se carga la vista de caso<br>
+                <span class="gherkin-keyword">Entonces</span> veo en la misma pantalla: estado + SLA restante, datos del pedido/vendedor/transportadora, evidencia adjunta e historial[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que el caso tiene evidencia adjunta previamente<br>
+                <span class="gherkin-keyword">Cuando</span> abro el caso<br>
+                <span class="gherkin-keyword">Entonces</span> puedo verla sin navegar a otro módulo[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que el caso no tiene ninguna acción registrada aún<br>
+                <span class="gherkin-keyword">Cuando</span> abro el caso<br>
+                <span class="gherkin-keyword">Entonces</span> la zona de historial muestra un estado vacío explícito, no un espacio en blanco ambiguo[cite: 6]
+            </div>
+        </div>
+
+        <div class="open-question">
+            <div class="open-question__label">❓ Pregunta abierta para el checkpoint[cite: 6]</div>
+            ¿Qué campos del "contexto del pedido" ya viven en un mismo servicio/API hoy, y cuáles requieren llamadas a sistemas distintos (pedido, transportadora, vendedor)?[cite: 6] Define si la vista se puede construir en un solo sprint o necesita orquestación adicional[cite: 6].
+        </div>
+
+        <!-- Historia 3 -->
+        <h2 class="section-title">
+            <span>Historia 3 — Evidencia obligatoria al resolver</span>
+            <span class="badge-feature">F4</span>[cite: 6]
+        </h2>
+
+        <div class="story-card">
+            <strong>Como</strong> agente SAC, <strong>quiero</strong> que el sistema me exija adjuntar evidencia antes de cerrar una novedad, <strong>para</strong> reducir la tasa de reapertura por falta de respaldo[cite: 6].
+        </div>
+
+        <div class="gherkin-box">
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que estoy resolviendo una novedad<br>
+                <span class="gherkin-keyword">Cuando</span> intento guardar la solución sin adjuntar evidencia<br>
+                <span class="gherkin-keyword">Entonces</span> el sistema bloquea el guardado y muestra un mensaje indicando que se requiere evidencia[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que adjunto una evidencia válida (foto, captura, comprobante)<br>
+                <span class="gherkin-keyword">Cuando</span> guardo la solución<br>
+                <span class="gherkin-keyword">Entonces</span> el caso se actualiza y la evidencia queda visible en el historial[cite: 6]
+            </div>
+            <div class="gherkin-block">
+                <span class="gherkin-keyword">Dado</span> que el tipo de novedad es "cliente rehúsa pagar o recibir"<br>
+                <span class="gherkin-keyword">Cuando</span> documento el motivo<br>
+                <span class="gherkin-keyword">Entonces</span> el sistema exige elegir una causa de una lista estructurada, no texto libre[cite: 6]
+            </div>
+        </div>
+
+        <div class="open-question">
+            <div class="open-question__label">❓ Pregunta abierta para el checkpoint[cite: 6]</div>
+            ¿Qué cuenta como "evidencia válida"?[cite: 6] ¿Hay un tamaño/formato de archivo que el backend ya soporta, o hay que definirlo desde cero?[cite: 6] Sin esta definición compartida, el criterio de aceptación no es verificable[cite: 6].
+        </div>
+
+        <!-- Conclusión -->
+        <div class="conclusion-box">
+            <h3>Por qué estas preguntas van en este documento y no se resuelven aquí[cite: 6]</h3>
+            <p>Cada historia tiene al menos un criterio que el diseño no puede cerrar solo[cite: 6]. Esa es la prueba de que el checkpoint PO + Tech Lead + Designer no es un formalismo — es el punto donde intención de negocio, factibilidad técnica y lógica de interacción se encuentran antes de que cualquiera de los tres construya algo por su cuenta[cite: 6].</p>
+            <p style="margin-top: 12px;"><strong>Salida esperada del checkpoint:</strong> cada pregunta abierta resuelta y anotada directamente en este documento, convirtiendo cada historia en un criterio de aceptación cerrado y verificable — recién ahí queda lista para pasar a diseño de detalle y desarrollo[cite: 6].</p>
+        </div>
+
+        <footer class="foot">
+            Insumo para alineación técnica y de producto · Discovery SAC · Dropi[cite: 6]
+        </footer>
+    </div>
+
+</body>
+</html>
