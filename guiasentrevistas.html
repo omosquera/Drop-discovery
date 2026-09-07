@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías de Entrevista - Discovery SAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #F36F21;
+            --brand-cta: #FF5722;
+            --surface-base: #FFFFFF;
+            --surface-raised: #F8F9FA;
+            --text-primary: #212529;
+            --text-numbers: #1A1A1A;
+            --border-default: #E0E0E0;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--border-default);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic__canvas {
+            background-color: var(--surface-base);
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .infographic__header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--brand-primary);
+            padding-bottom: 15px;
+        }
+
+        .infographic__title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-numbers);
+            margin: 0 0 8px 0;
+        }
+
+        .infographic__subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Ocultar citas visualmente */
+        .cite {
+            display: none;
+        }
+
+        /* Banner Principios Generales */
+        .principles-banner {
+            background-color: var(--surface-raised);
+            border-left: 4px solid var(--brand-primary);
+            padding: 24px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 40px;
+        }
+
+        .principles-banner h2 {
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            color: var(--text-numbers);
+        }
+
+        .principles-list {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .principles-list li {
+            margin-bottom: 12px;
+        }
+
+        .principles-list strong {
+            color: var(--text-numbers);
+        }
+
+        /* Grilla de Guías */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+        }
+
+        /* Tarjeta de Rol */
+        .guide-card {
+            background-color: var(--surface-base);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .guide-card__header {
+            background-color: var(--surface-raised);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-default);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guide-card__title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-numbers);
+        }
+
+        .badge {
+            background-color: var(--text-primary);
+            color: var(--surface-base);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge--highlight {
+            background-color: var(--brand-cta);
+        }
+
+        .guide-card__body {
+            padding: 24px;
+        }
+
+        /* Fases de la entrevista */
+        .phase {
+            margin-bottom: 20px;
+        }
+
+        .phase:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase__title {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--brand-primary);
+            letter-spacing: 0.5px;
+            margin: 0 0 8px 0;
+        }
+
+        .question-list {
+            margin: 0;
+            padding-left: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .question-list li {
+            margin-bottom: 8px;
+        }
+        
+        .question-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic__canvas">
+        <header class="infographic__header">
+            <h1 class="infographic__title">Guías de Entrevista por Rol<span class="cite">[cite: 2]</span></h1>
+            <p class="infographic__subtitle">Discovery — Gestión de Novedades y Casos SAC · Dropi<span class="cite">[cite: 2]</span></p>
+        </header>
+
+        <section class="principles-banner">
+            <h2>Principios generales de la entrevista<span class="cite">[cite: 2]</span></h2>
+            <ul class="principles-list">
+                <li><strong>Preguntas de comportamiento, no de opinión:</strong> “Cuéntame de la última vez que...” revela lo que la persona realmente hace. “¿Qué opinas de...?” revela lo que cree que debería decir.<span class="cite">[cite: 2]</span></li>
+                <li><strong>Deja que la pantalla hable:</strong> cuando el rol lo permita, pide que compartan pantalla o trabajen en vivo mientras narran — verás la herramienta real, no la versión idealizada que describen de memoria.<span class="cite">[cite: 2]</span></li>
+            </ul>
+        </section>
+
+        <div class="guides-grid">
+            
+            <!-- 1. Agente SAC -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">1. Agente SAC (2-3 países)<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge badge--highlight">45-60 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    <p style="font-size: 12px; margin-top: 0; color: #666;"><em>Idealmente con shadowing / pantalla compartida<span class="cite">[cite: 2]</span></em></p>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo es un día típico tuyo desde que inicias turno.<span class="cite">[cite: 2]</span></li>
+                            <li>¿Cuántos casos manejas en promedio al día?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core (en vivo si es posible)<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Muéstrame cómo decides qué caso atender primero ahora mismo.<span class="cite">[cite: 2]</span></li>
+                            <li>Camina conmigo por el último caso que resolviste, desde que lo viste hasta que lo cerraste.<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué tienes abierto en tu pantalla mientras trabajas? (comparte pantalla)<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de la última vez que usaste Excel, WhatsApp o una nota aparte para resolver algo. ¿Por qué no lo hiciste directo en el sistema?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué información necesitas para resolver un caso que hoy no está a la vista o tienes que buscar en otro lado?<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de un caso que se te venció el SLA. ¿Qué pasó?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Si pudieras cambiar una sola cosa de esta herramienta, ¿cuál sería?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Notas diferencias entre cómo trabajas tú y cómo trabaja un compañero de otro país?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Algo que no te pregunté y creas que debería saber?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. Supervisor / Team lead SAC -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">2. Supervisor / Team lead SAC<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge">45 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo es tu rutina de supervisión en un día normal.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Cómo sabes, en tiempo real, si tu equipo va a incumplir el SLA hoy?<span class="cite">[cite: 2]</span></li>
+                            <li>Muéstrame cómo ves la carga de trabajo de tu equipo ahora mismo.<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de la última vez que tuviste que reasignar o escalar un caso. ¿Cómo te enteraste de que había que hacerlo?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué reportes revisas al final del día o de la semana? ¿De dónde los sacas?<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de un momento en que un país tuvo un pico de novedades. ¿Cómo lo manejaste?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué decisiones tomas hoy con la información que tienes, y cuáles te gustaría tomar pero no puedes por falta de visibilidad?<span class="cite">[cite: 2]</span></li>
+                            <li>Si tuvieras un dashboard ideal, ¿qué tendría que mostrarte sin que tú lo pidas?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Algo más que deba saber sobre cómo gestionas al equipo?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. PO (dupla de trabajo) -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">3. PO (dupla de trabajo)<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge">45-60 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo llegó este proceso a ser prioridad ahora.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué se ha intentado arreglar antes en esta herramienta, y por qué no funcionó o no se terminó?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué restricciones técnicas debería conocer desde ya? (estructura de datos por país, integraciones con transportadoras)<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué tan distinta es la configuración entre países hoy, a nivel de backend?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué señales de negocio (KPIs, quejas, costos) hicieron que esto subiera de prioridad?<span class="cite">[cite: 2]</span></li>
+                            <li>Sin PM formal, ¿cómo se ha decidido prioridad hasta ahora entre negocio y diseño?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué tan abierto está el equipo técnico a rehacer el modelo de datos si el discovery lo justifica, versus solo tocar la capa visual?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Con quién más debería hablar que no esté en mi lista?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué te preocupa de este proceso que aún no hayamos hablado?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4. Vendedor/seller afectado -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">4. Vendedor/seller afectado (1-2)<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge">30 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo te enteras cuando hay un problema con una entrega de tus pedidos.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame de la última vez que tuviste una novedad con un pedido. ¿Qué pasó y cuánto tardó en resolverse?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Cómo te afecta cuando una entrega o un pago se demora?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué haces cuando sientes que un caso está tardando demasiado? ¿A quién contactas?<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame si alguna vez has considerado reducir tu operación en Dropi por temas de novedades o pagos.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Si pudieras ver el estado de tus casos en tiempo real, ¿qué necesitarías ver primero?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Algo que quieras que el equipo de Dropi sepa sobre esto?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5. Lead técnico / Dev -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">5. Lead técnico / Dev<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge">45 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo está estructurado hoy el backend de novedades/casos SAC.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué tan distinto es el modelo de datos de novedades entre países hoy? ¿Comparten esquema o son independientes?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué tan fácil sería tener un campo de “causa de novedad” estandarizado entre países? ¿Qué se rompería si lo hiciéramos?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Cómo se integran hoy con las transportadoras por país — vía API, manual, distinto en cada una?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué tan factible es calcular tiempo restante de SLA en tiempo real y mostrarlo como alerta?<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de alguna vez que un cambio para un país rompió algo en otro.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>De estos 3 cambios — superficie de urgencia, taxonomía común, dashboard agregado — ¿cuál es técnicamente más barato y cuál más caro?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Cómo prefieres trabajar sin specs cerradas: prototipos, criterios de aceptación, pair design?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué te gustaría que yo entendiera de tu lado antes de empezar a proponer soluciones?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6. Ops / Logística -->
+            <article class="guide-card">
+                <div class="guide-card__header">
+                    <h2 class="guide-card__title">6. Ops / Logística<span class="cite">[cite: 2]</span></h2>
+                    <span class="badge">30-45 min<span class="cite">[cite: 2]</span></span>
+                </div>
+                <div class="guide-card__body">
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Apertura<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>Cuéntame cómo se genera una novedad desde el lado de transporte.<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Core<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Cómo se entera SAC de que existe una novedad, hoy? ¿Es automático o manual?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué tan distintas son las causas de novedad entre las transportadoras que manejas por país?<span class="cite">[cite: 2]</span></li>
+                            <li>Cuéntame de la última vez que una novedad se demoró en llegar a SAC. ¿Qué pasó?<span class="cite">[cite: 2]</span></li>
+                            <li>¿Qué información tienes tú que SAC no ve, y viceversa?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Profundización<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Qué tan estandarizable es la relación con transportadoras entre países, o cada una funciona muy distinto?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase">
+                        <h3 class="phase__title">Cierre<span class="cite">[cite: 2]</span></h3>
+                        <ul class="question-list">
+                            <li>¿Algo que deba saber sobre cómo opera tu área que no te haya preguntado?<span class="cite">[cite: 2]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+</body>
+</html>
