@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitectura de información — Novedades y casos SAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-primary: #F36F21;
+    --brand-cta: #FF5722;
+    --surface-base: #FFFFFF;
+    --surface-raised: #F8F9FA;
+    --text-primary: #212529;
+    --text-numbers: #1A1A1A;
+    --border-default: #E0E0E0;
+    --border-table: #E9ECEF;
+    --font-main: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  
+  body {
+    font-family: var(--font-main);
+    background-color: var(--border-default);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .infographic__canvas {
+    background-color: var(--surface-base);
+    width: 100%;
+    max-width: 1000px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  .infographic__header {
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--brand-primary);
+    padding-bottom: 15px;
+  }
+
+  .infographic__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-numbers);
+    margin: 0 0 8px 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 48px 0 20px 0;
+    color: var(--text-numbers);
+    border-left: 4px solid var(--brand-primary);
+    padding-left: 10px;
+  }
+
+  p { line-height: 1.6; margin: 0; font-size: 14px; }
+  .meta { color: #5B6270; font-size: 14px; margin-top: 10px; }
+
+  /* Elementos Estructurales con separación vertical estricta */
+  .timeline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .tl-node {
+    background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: 999px;
+    padding: 10px 18px; font-size: 14px; font-weight: 500; white-space: nowrap; color: var(--text-numbers);
+  }
+  .tl-node.final { border-color: #2F6B1F; color: #2F6B1F; background: #EAF2E2; }
+  .tl-arrow { color: #5B6270; font-size: 16px; }
+
+  .branches { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .branch {
+    font-size: 13px; color: #B14A2B; background: #F7E9E3;
+    border-radius: 6px; padding: 6px 12px; font-weight: 500;
+  }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .block { background: var(--surface-raised); border: 1px solid var(--border-default); border-top: 3px solid var(--brand-primary); padding: 22px 24px; border-radius: 8px; }
+  .block.variable { border-top-color: var(--brand-cta); }
+  .block h3 { font-size: 16px; margin-bottom: 12px; font-weight: 700; color: var(--text-numbers); }
+  .block ul { margin: 0; padding-left: 18px; }
+  .block li { font-size: 14px; padding: 4px 0; color: var(--text-primary); }
+  .relation { text-align: center; font-size: 13px; color: #5B6270; margin-top: 16px; font-style: italic; }
+
+  .actors { display: flex; flex-wrap: wrap; gap: 10px; }
+  .actor {
+    font-size: 14px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border-default);
+    background: var(--surface-raised); color: var(--text-primary); font-weight: 500;
+  }
+  .actor.new { border: 1px dashed var(--brand-cta); color: var(--brand-cta); background: #F7E9E3; }
+
+  .callout {
+    border-left: 4px solid var(--brand-primary); background: var(--surface-raised); padding: 20px 24px;
+    border-radius: 0 8px 8px 0; border-top: 1px solid var(--border-default); border-right: 1px solid var(--border-default); border-bottom: 1px solid var(--border-default);
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .callout p { font-size: 15px; color: var(--text-primary); }
+  .callout .label { font-size: 13px; color: var(--brand-primary); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .roadmap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .horizon { padding: 22px 24px; background: var(--surface-raised); border-radius: 8px; border: 1px solid var(--border-default); }
+  .horizon.now { border-left: 4px solid var(--text-numbers); }
+  .horizon.future { border-left: 4px dashed var(--border-default); color: #5B6270; }
+  .horizon h3 { font-size: 16px; margin-bottom: 10px; font-weight: 700; color: var(--text-numbers); }
+  .horizon ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--text-primary); }
+  .horizon li { margin-bottom: 6px; }
+
+  /* Contenedor de las imágenes de flujos optimizado */
+  .flow-image-container {
+    background: #121212;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .flow-image-container img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  /* Prototipos UI */
+  .ui-mockup {
+    background: #121212;
+    color: #E0E0E0;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    overflow-x: auto;
+  }
+  
+  .ui-mockup__header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #A0A0A0;
+    font-weight: 500;
+  }
+
+  .ui-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .ui-table th {
+    text-align: left;
+    color: #888;
+    padding: 10px 14px;
+    border-bottom: 1px solid #333;
+    font-weight: 600;
+  }
+
+  .ui-table td {
+    padding: 14px;
+    border-bottom: 1px solid #222;
+  }
+
+  .ui-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+  }
+  .ui-badge--urgent { background: rgba(255, 87, 34, 0.2); color: #FF5722; border: 1px solid #FF5722; }
+  .ui-badge--medium { background: rgba(243, 111, 33, 0.2); color: #F36F21; border: 1px solid #F36F21; }
+  .ui-badge--ok { background: rgba(47, 107, 31, 0.2); color: #4CAF50; border: 1px solid #4CAF50; }
+
+  .ui-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .ui-box {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .ui-box__title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--brand-primary);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  .ui-chat-msg {
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .ui-chat-msg span { color: #888; font-weight: 500; }
+  
+  .ui-btn {
+    background: #222;
+    border: 1px solid #444;
+    color: #FFF;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 8px;
+    margin-top: 8px;
+  }
+  .ui-btn--primary { background: var(--brand-primary); border-color: var(--brand-primary); color: #FFF; font-weight: 700; }
+
+  .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-default); font-size: 13px; color: #5B6270; text-align: center; }
+
+  @media (max-width: 768px) {
+    .infographic__canvas { padding: 20px; }
+    .split, .roadmap, .ui-split { grid-template-columns: 1fr; }
+    .tl-arrow { display: none; }
+    .timeline { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="infographic__canvas">
+  <header class="infographic__header">
+    <h1 class="infographic__title">Arquitectura de información</h1>
+    <p class="meta">Gestión de novedades y casos SAC — Dropi · síntesis multipaís, sin PM[cite: 2]</p>
+  </header>
+
+  <section>
+    <h2 class="section-title">Máquina de estados del pedido</h2>
+    <div class="timeline">
+      <span class="tl-node">Pendiente de confirmación</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-node">Pendiente</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-node">Guía generada</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-node">En tránsito</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-node final">Entregado</span>
+    </div>
+    <div class="branches">
+      <span class="branch">En tránsito ↳ puede derivar en novedad</span>
+      <span class="branch">Entregado ↳ puede derivar en garantía</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Modelo de datos: núcleo vs. capa variable por país</h2>
+    <div class="split">
+      <div class="block">
+        <h3>Núcleo común</h3>
+        <ul>
+          <li>Estado del caso y transiciones</li>
+          <li>Tiempo transcurrido / restante de SLA</li>
+          <li>Pedido, vendedor y transportadora asociados</li>
+          <li>Evidencia adjunta</li>
+          <li>Historial de acciones</li>
+          <li>Submódulo de garantías</li>
+          <li>No cobro de devolución al dropshipper</li>
+        </ul>
+      </div>
+      <div class="block variable">
+        <h3>Capa variable por país</h3>
+        <ul>
+          <li>Horas hábiles del SLA de 48h (calendario local)</li>
+          <li>Política de intentos por transportadora</li>
+          <li>Actas de incautación (legislación local)</li>
+          <li>Formato de dirección / referencia geográfica</li>
+          <li>Moneda y montos de COD</li>
+        </ul>
+      </div>
+    </div>
+    <p class="relation">La capa variable extiende el núcleo — nunca lo duplica por país[cite: 2]</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Actores del flujo</h2>
+    <div class="actors">
+      <span class="actor">Agente SAC</span>
+      <span class="actor">Supervisor</span>
+      <span class="actor">Vendedor / dropshipper</span>
+      <span class="actor">Ops / logística</span>
+      <span class="actor">Lead técnico / dev</span>
+      <span class="actor">PO</span>
+      <span class="actor new">Proveedor — nuevo hallazgo</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Taxonomía de causas de novedad</h2>
+    <div class="split">
+      <div class="block">
+        <h3>Núcleo (comportamiento)</h3>
+        <ul>
+          <li>Cliente ilocalizable</li>
+          <li>Dirección incompleta</li>
+          <li>Cliente se rehúsa a pagar / recibir</li>
+        </ul>
+      </div>
+      <div class="block variable">
+        <h3>Variable (geografía / legislación)</h3>
+        <ul>
+          <li>Zona de difícil acceso</li>
+          <li>Acta de incautación</li>
+          <li>Avería con reclamo de seguro</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="callout">
+      <p class="label">Insight clave</p>
+      <p>Dropi ya resolvió parte del problema: Chatcenter combina WhatsApp y la tarjeta del pedido en una sola vista. La oportunidad no es inventar la centralización de contexto — es extender ese patrón con una zona de urgencia (SLA) y una zona de evidencia estructurada, hoy ausentes en esa tarjeta[cite: 2].</p>
+    </div>
+  </section>
+
+  <!-- Imagen del Flujo Agente SAC -->
+  <section>
+    <h2 class="section-title">Flujo de Agente SAC</h2>
+    <div class="flow-image-container">
+      <img src="Flujo_Agente_SAC.png" alt="Flujo Agente SAC">
+    </div>
+  </section>
+
+  <!-- Imagen del Flujo Supervisor -->
+  <section>
+    <h2 class="section-title">Flujo de Supervisor / Team Lead</h2>
+    <div class="flow-image-container">
+      <img src="Flujo_Supervisor.png" alt="Flujo Supervisor">
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Prototipo UI — Bandeja de casos</h2>
+    <div class="ui-mockup">
+      <div class="ui-mockup__header">
+        <span>NOVEDADES Y CASOS SAC</span>
+        <span>Agente: Maria G. &nbsp;|&nbsp; País: [CO ▾] &nbsp;|&nbsp; Ordenar por: [Urgencia SLA ▾]</span>
+      </div>
+      <table class="ui-table">
+        <thead>
+          <tr>
+            <th>Urgencia / SLA</th>
+            <th>ID Pedido</th>
+            <th>Causa de Novedad</th>
+            <th>Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ui-badge ui-badge--urgent">[URGENTE]</span> 00:42 restante</td>
+            <td>#38291</td>
+            <td>Cliente ilocalizable</td>
+            <td>Tienda ABC . Servientrega</td>
+          </tr>
+          <tr>
+            <td><span class="ui-badge ui-badge--urgent">[URGENTE]</span> 01:15 restante</td>
+            <td>#38305</td>
+            <td>Dirección incompleta</td>
+            <td>Tienda XYZ . Coordinadora</td>
+          </tr>
+          <tr>
+            <td><span class="ui-badge ui-badge--medium">[MEDIO]</span> 04:30 restante</td>
+            <td>#38310</td>
+            <td>Cliente rehúsa pago</td>
+            <td>Tienda ABC . Envia</td>
+          </tr>
+          <tr>
+            <td><span class="ui-badge ui-badge--ok">[OK]</span> 18:00 restante</td>
+            <td>#38312</td>
+            <td>Producto averiado</td>
+            <td>Tienda LMN . Servientrega</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align: center; margin-top: 20px;">
+        <span class="ui-btn">[ Cargar más casos ]</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Prototipo UI — Vista de caso individual</h2>
+    <div class="ui-mockup">
+      <div class="ui-mockup__header">
+        <span>&lt; Volver a bandeja</span>
+        <span>CASO #38291 &nbsp;|&nbsp; País: CO</span>
+      </div>
+      
+      <div class="ui-split">
+        <div class="ui-box">
+          <div class="ui-box__title">Chat con cliente (WhatsApp)</div>
+          <div class="ui-chat-msg"><span>[Cliente]</span> Hola, no estoy en casa</div>
+          <div class="ui-chat-msg"><span>[Agente]</span> Deme una referencia cercana, por favor</div>
+          <div class="ui-chat-msg"><span>[Cliente]</span> Al lado de la tienda "La Esquina"</div>
+          <div style="margin-top: 20px; display: flex; gap: 8px;">
+            <span class="ui-btn" style="flex-grow: 1; text-align: left; color: #777;">Escribir mensaje...</span>
+            <span class="ui-btn ui-btn--primary">Enviar</span>
+          </div>
+          <div style="margin-top: 16px;">
+            <span class="ui-btn">[Confirmar]</span>
+            <span class="ui-btn">[Resolver novedad]</span>
+          </div>
+        </div>
+
+        <div class="ui-box">
+          <div class="ui-box__title">Estado y Contexto del Pedido</div>
+          <div style="font-size: 13px; margin-bottom: 12px; color: #FF5722; font-weight: bold;">
+            [URGENTE 00:42] · ESTADO: En gestión<br>
+            <span style="color: #A0A0A0; font-weight: normal;">Sugerencia: confirmar nueva dirección</span>
+          </div>
+          <hr style="border-color: #333; margin: 10px 0;">
+          <div style="font-size: 13px; line-height: 1.5; color: #ccc;">
+            <strong>Pedido #38291</strong> . Vendedor: Tienda ABC<br>
+            <strong>Transportadora:</strong> Servientrega<br>
+            <strong>Dirección actual:</strong> Cra 45 #12-30
+          </div>
+          <hr style="border-color: #333; margin: 10px 0;">
+          <div class="ui-box__title" style="margin-top: 0;">Evidencia</div>
+          <div style="font-size: 13px; color: #888; margin-bottom: 8px;">(sin evidencia adjunta)</div>
+          <span class="ui-btn">[ + Adjuntar evidencia ]</span>
+          <hr style="border-color: #333; margin: 10px 0;">
+          <div class="ui-box__title" style="margin-top: 0;">Historial</div>
+          <div style="font-size: 12px; color: #aaa; line-height: 1.4;">
+            10:02 Transportadora reporta novedad<br>
+            10:05 Agente contacta al cliente
+          </div>
+          <div style="margin-top: 14px;">
+            <span class="ui-btn">[ Actualizar dirección ]</span>
+            <span class="ui-btn">[ Agendar fecha ]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 0;">
+    <h2 class="section-title">Roadmap de la propuesta</h2>
+    <div class="roadmap">
+      <div class="horizon now">
+        <h3>Horizonte 1 — ahora</h3>
+        <ul>
+          <li>Centralizar contexto del caso</li>
+          <li>Exponer urgencia real de SLA</li>
+          <li>Estructurar evidencia</li>
+          <li>Visibilidad agregada para supervisor</li>
+        </ul>
+      </div>
+      <div class="horizon future">
+        <h3>Horizonte 2 — visión</h3>
+        <ul>
+          <li>Priorización predictiva de SLA</li>
+          <li>Asignación automática optimizada</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Documento de síntesis — arquitectura basada en discovery simulado y en investigación real del CRM de Dropi[cite: 2].
+  </footer>
+</div>
+
+</body>
+</html>
